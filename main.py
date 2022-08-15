@@ -72,9 +72,9 @@ class stardust:
      async with aiohttp.ClientSession() as session:
        async with session.put(f"https://discord.com/api/v9/guilds/{guild}/bans/{member}", headers=headers) as response:
         if response.status in (200, 201, 202, 203, 204):
-          Write.Print(f'[ {t1} ] Banned {member}\n', normal, interval=0.0001)
+          Write.Print(f'[ {t1} ] Banned {member}', normal, interval=0.0001)
         else:
-          Write.Print(f'[ {t1} ] Couldnt Ban {member}\n', normal, interval=0.0001)
+          Write.Print(f'[ {t1} ] Couldnt Ban {member}', normal, interval=0.0001)
 
    async def kick(guild, member):
      async with aiohttp.ClientSession() as session:
@@ -120,21 +120,21 @@ class stardust:
          os.remove("scraped/roles.txt")
        except:
          pass
-       for m in g.members:
-           with open("scraped/members.txt", "a") as file:
+       with open("scraped/members.txt", "w") as file:
+            for m in g.members:
              file.write(f"{m.id}\n")
-             file.close()
-       for c in g.channels:
+             
            
-           with open("scraped/channels.txt", "a") as file:
+       with open("scraped/channels.txt", "w") as file:
+            for c in g.channels:
              file.write(f"{c.id}\n")
-             file.close()
-       for r in g.roles:
+             
            
-           with open("scraped/members.txt", "a") as file:
+       with open("scraped/roles.txt", "w") as file:
+            for r in g.roles:
              file.write(f"{r.id}\n")
-             file.close()
-       Write.Print(f'[ {t1} ] Scraped {len(g.members)} Members\n{len(g.channels)} Channels\n{len(g.roles)} Roles\n', normal, interval=0.0001)
+             
+       Write.Print(f'Scraped {len(g.members)} Members\n{len(g.channels)} Channels\n{len(g.roles)} Roles\n', normal, interval=0.0001)
 
    async def chcreate(guild, name):
     async with aiohttp.ClientSession() as session:
@@ -266,7 +266,7 @@ def banner():
   elif choice == '9':
     asyncio.run(stardust.nuke())
 
-  elif choice == '10':
+  elif choice == '0':
     exit()
   else:
      banner()
